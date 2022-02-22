@@ -25,7 +25,7 @@ const Register = () => {
             }
 
             register(newUser).then(res => {
-                navigate('/welcome')
+                navigate('/home')
             })
         }
 
@@ -54,7 +54,7 @@ const Register = () => {
                  <div> <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
 </div>           
-       <Button type="submit" >Register</Button>     
+       <Button onClick={Register} type="submit" >Register</Button>     
         </form>
         
         

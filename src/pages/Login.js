@@ -24,7 +24,7 @@ const Login = () => {
 
         Login(user).then(res => {
             if (res) {
-                navigate('/welcome')
+                navigate('/')
             }
         })
     }
@@ -34,9 +34,9 @@ const Login = () => {
             <h1 className="">Please sign in</h1>
 
             <form noValidate onSubmit={testLogin}>
-                <h1>LOG IN PAGE</h1>
-                    <div> <label htmlFor="email">Email</label>
-                        <input type="email" name="email" placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+                <h1>LOGIN PAGE</h1>
+                    <div> <label htmlFor="username">Username</label>
+                        <input type="username" name="username" placeholder="Enter your username" value={userName} onChange={(e)=>setUserName(e.target.value)}></input>
                     </div>
                     <div> <label htmlFor="password">Password</label>
                         <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>

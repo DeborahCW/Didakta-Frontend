@@ -1,11 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Header from "./pages/Header";
+import AppRouter from "./AppRouter";
 
 function App() {
   return (
+    
     <div>
-    <Header></Header>
+      <AppRouter />
+    <Header />
 
     <div className="App">
       <iframe
