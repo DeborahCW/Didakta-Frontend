@@ -1,66 +1,129 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Button from "@mui/material/Button";
-import {register} from "../logic/UserFunctions"
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Register = () => {
-
-    const [first, setFirst] = useState('')
-    const [last, setLast] = useState('')
-    const [userName, setUserName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    let navigate = useNavigate()
-    
-        const createUser = (e) => {
-            e.preventDefault()
-
-            const newUser = {
-                first: first,
-                last: last,
-                userName : userName,
-                email: email,
-                password: password
-            }
-
-            register(newUser).then(res => {
-                navigate('/home')
-            })
-        }
-
-    return (
-        <div><h1>REGISTER PAGE</h1>
-            <form onSubmit={createUser}>
-                <div>
-                    <label htmlFor="first">First Name</label>
-            <input name="first" type="text" placeholder="Enter your first name" value={first} onChange={(e) => setFirst(e.target.value)}></input>
-
-            </div>
-            <div>
-                <label htmlFor="last">Last Name</label>
-                <input type="text" name="last" placeholder="Enter your last name" value={last} onChange={(e)=>setLast(e.target.value)}></input>
-            </div>
-            <div>
-                <label htmlFor="userName">Username</label>
-                <input type="text" name="userName" placeholder="Enter your username" value={userName} onChange={(e)=>setUserName(e.target.value)}></input>
-            </div>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
-                           
-                </div>
-                            
-                 <div> <label htmlFor="password">Password</label>
-            <input name="password" type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-</div>           
-       <Button onClick={Register} type="submit" >Register</Button>     
-        </form>
-        
-        
-        
-        </div>
-    )
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        DIDAKTA
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
-export default Register
+const theme = createTheme();
+
+export default function SignUp() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Registration
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                  
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Register
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}
