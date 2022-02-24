@@ -13,8 +13,8 @@ import logo from '../images/logo.png';
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box bgcolor="text.secondary" sx={{ flexGrow: 1 }}>
+      <AppBar bgcolor="text.secondary" position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/"><img id="Logo" width="220" height="90" padding-top="10" src={logo}/></Link>
           </Typography>
-
+          <Link to="/about"><Button color="inherit">About DIDAKTA</Button></Link>
           <Link to="/login"><Button color="inherit">Login</Button></Link>
           <Link to="/register"><Button color="inherit">Register</Button></Link>
         </Toolbar>
