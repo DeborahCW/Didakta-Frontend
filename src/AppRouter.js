@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import App from "./App";
-import Header from "./pages/Header";
-import Footer from "./pages/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const AppRouter = () => {
   return (

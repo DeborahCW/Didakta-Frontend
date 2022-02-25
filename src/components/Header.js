@@ -1,13 +1,12 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import { Link } from 'react-router-dom';
-import Login from './Login';
-import logo from '../images/logo.png';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import { Link } from "react-router-dom";
+import logo from "../images/logo.png";
 
 // import MenuIcon from '@mui/icons-material/Menu';
 
@@ -25,24 +24,34 @@ export default function ButtonAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
-          <Link to="/" ></Link>
+          <Link to="/"></Link>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/"><img id="Logo" width="220" height="90" padding-top="10" src={logo}/></Link>
+            <Link to="/">
+              <img
+                id="Logo"
+                width="220"
+                height="90"
+                padding-top="10"
+                src={logo}
+              />
+            </Link>
           </Typography>
-          <Link to="/about"><Button color="inherit">About DIDAKTA</Button></Link>
-          <Link to="/login"><Button color="inherit">Login</Button></Link>
-          <Link to="/register"><Button color="inherit">Register</Button></Link>
+          <Link to="/about">
+            <Button color="inherit">About DIDAKTA</Button>
+          </Link>
+          <Link to="/login">
+            <Button color="inherit">Login</Button>
+          </Link>
+          <Link to="/register">
+            <Button color="inherit">Register</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
 
-
-
 // import {Route, Routes, Link} from "react-router-dom";
- 
-
 
 // const Header = () => {
 
