@@ -15,16 +15,6 @@ export default function ButtonAppBar() {
     <Box bgcolor="text.secondary" sx={{ flexGrow: 1 }}>
       <AppBar bgcolor="text.secondary" position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Link to="/"></Link>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/">
               <img
@@ -33,6 +23,7 @@ export default function ButtonAppBar() {
                 height="90"
                 padding-top="10"
                 src={logo}
+                alt="Didakta Logo"
               />
             </Link>
           </Typography>

@@ -1,14 +1,14 @@
-import React from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./AppRouter";
+import CssBaseline from "@mui/material/CssBaseline";
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
+      <CssBaseline enableColorScheme />
       <AppRouter />
     </React.StrictMode>
   </BrowserRouter>,
