@@ -9,6 +9,8 @@ export const register = async (userData) => {
         last: userData.last,
         email: userData.email,
         password: userData.password,
+        lessonProgress: userData.lessonProgress,
+        chapterProgress: userData.chapterProgress,
       }
     );
     console.log("Successfully registered");

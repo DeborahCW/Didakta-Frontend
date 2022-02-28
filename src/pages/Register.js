@@ -38,6 +38,8 @@ const Register = () => {
       last: last,
       email: email,
       password: password,
+      lessonProgress: 1,
+      chapterProgress: 1,
     };
 
     register(userData)
