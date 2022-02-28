@@ -12,23 +12,26 @@ import logo from "../images/logo.png";
 
 export default function ButtonAppBar() {
   return (
-    <Box bgcolor="text.secondary" sx={{ flexGrow: 1 }}>
-      <AppBar bgcolor="text.secondary" position="static">
+    <Box sx={{ flexGrow: 1, backgroundColor: "#1c2128" }}>
+      <AppBar sx={{ backgroundColor: "#1c2128" }} position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/">
               <img
                 id="Logo"
-                width="220"
-                height="90"
+                width="100"
                 padding-top="10"
                 src={logo}
                 alt="Didakta Logo"
+                style={{ paddingTop: "10px" }}
               />
             </Link>
           </Typography>
           <Link to="/about">
-            <Button color="inherit">About DIDAKTA</Button>
+            <Button color="inherit">About</Button>
+          </Link>
+          <Link to="/dashboard">
+            <Button color="inherit">Dashboard</Button>
           </Link>
           <Link to="/login">
             <Button color="inherit">Login</Button>
