@@ -5,6 +5,7 @@ import App from "./App";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Lesson from "./pages/Lesson";
+import Dashboard from "./pages/Dashboard";
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/course" element={<Lesson />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </div>
