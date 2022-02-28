@@ -31,7 +31,7 @@ const Footer = () => {
       <Box
         px={{ xs: 3, sm: 10 }}
         py={{ xs: 5, sm: 10 }}
-        bgcolor="text.secondary"
+        sx={{ backgroundColor: "#000000" }}
         color="white"
       >
         <Container maxWidth="lg">
