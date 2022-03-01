@@ -82,59 +82,53 @@ export const showAudio = (chapter) => {
 export const showQuestionText = (chapter) => {
   if (chapter.questionText) {
     return chapter.questionText.map((paragraph) => {
-      return <p className="chapterQuestionText">{paragraph}</p>;
+      return <p className="chapterText">{paragraph}</p>;
     });
   }
 };
 
-export const showQuestions = (chapter) => {
-  if (chapter.questions) {
-    return chapter.questions.map((question) => {
-      if (question.tags == "dropDown") {
-        if (question.answers_1) {
-          return (
-            <form>
-              <select id="questionDropDown" name="questionDropDown">
-                {question.answers.map((answer) => {
-                  return <option value={answer}>{answer}</option>;
-                })}
-              </select>
-              <select id="questionDropDown_1" name="questionDropDown_1">
-                {question.answers_1.map((answer_1) => {
-                  return <option value={answer_1}>{answer_1}</option>;
-                })}
-              </select>
-              <input type="submit" />
-            </form>
-          );
-        } else {
-          return (
-            <form>
-              <select id="questionDropDown" name="questionDropDown">
-                {question.answers.map((answer) => {
-                  return <option value={answer}>{answer}</option>;
-                })}
-              </select>
-            </form>
-          );
-        }
-      } else {
-        <form>
-          {question.answers.map((answer) => {
-            return (
-              <label>
-                {answer}
-                <input
-                  type="radio"
-                  className="multipleChoices"
-                  name={question.tags}
-                  value={answer}
-                />
-              </label>
-            );
-          })}
-        </form>;
-      }
+export const showImg = (chapter) => {
+  if (chapter.img) {
+    return <img className="chapterImg" src={chapter.img} alt="chapterImage" />;
+  }
+};
+
+export const showAlignmentText = (chapter) => {
+  if (chapter.alignmentText) {
+    return chapter.alignmentText.map((paragraph) => {
+      return <p className="chapterText">{paragraph}</p>;
     });
+  }
+};
+
+export const showAlignment = (chapter) => {
+  if (chapter.alignment) {
+    return (
+      <iframe
+        style={{ height: "200px", overflow: "scroll", width: "100%" }}
+        frameborder="0"
+        seamless="seamless"
+        scrolling="no"
+        allowtransparency="true"
+        marginheight="1"
+        marginwidth="1"
+        src={chapter.alignment}
+        title="Ugarit | iAligner"
+        scroll="noscroll"
+      ></iframe>
+    );
+  }
+};
+
+export const showFootnotes = (chapter) => {
+  if (chapter.footnotes) {
+    return (
+      <div className="footnotes">
+        <hr />
+        {chapter.footnotes.map((footnote) => {
+          return <p className="footnote">{footnote}</p>;
+        })}
+      </div>
+    );
   }
 };
