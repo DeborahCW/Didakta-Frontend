@@ -12,8 +12,8 @@ import logo from "../images/logo.png";
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1, backgroundColor: "#1c2128" }}>
-      <AppBar sx={{ backgroundColor: "#1c2128" }} position="static">
+    <Box sx={{ flexGrow: 1, backgroundColor: "#78909c " }}>
+      <AppBar sx={{ backgroundColor: "#78909c" }} position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/">
@@ -27,17 +27,21 @@ export default function ButtonAppBar() {
               />
             </Link>
           </Typography>
-          <Link to="/about">
-            <Button color="inherit">About</Button>
+          <Link to="/about" style={{ textDecoration: "none"}}>
+            <Button 
+              sx={{ color: "#fffde7" }}>About</Button>
           </Link>
-          <Link to="/dashboard">
-            <Button color="inherit">Dashboard</Button>
+          <Link to="/dashboard" style={{ textDecoration: "none"}}>
+            <Button 
+              sx={{ color: "#fffde7"}}>Dashboard</Button>
           </Link>
-          <Link to="/login">
-            <Button color="inherit">Login</Button>
+          <Link to="/login" style={{ textDecoration: "none"}}>
+            <Button 
+              sx={{ color: "#fffde7"}}>Login</Button>
           </Link>
-          <Link to="/register">
-            <Button color="inherit">Register</Button>
+          <Link to="/register" style={{ textDecoration: "none"}}>
+            <Button 
+              sx={{ color: "#fffde7"}}>Register</Button>
           </Link>
         </Toolbar>
       </AppBar>
