@@ -43,16 +43,18 @@ export const showTable_1 = (chapter) => {
 export const showVideo = (chapter) => {
   if (chapter.youtube) {
     return (
-      <iframe
-        className="videoPlayer"
-        width="560"
-        height="315"
-        src={chapter.youtube}
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+      <div className="iFrameContainer">
+        <iframe
+          className="videoPlayer"
+          width="100%"
+          height="100%"
+          src={chapter.youtube}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
     );
   }
 };
@@ -104,18 +106,17 @@ export const showAlignmentText = (chapter) => {
 export const showAlignment = (chapter) => {
   if (chapter.alignment) {
     return (
-      <iframe
-        style={{ height: "200px", overflow: "scroll", width: "100%" }}
-        frameborder="0"
-        seamless="seamless"
-        scrolling="no"
-        allowtransparency="true"
-        marginheight="1"
-        marginwidth="1"
-        src={chapter.alignment}
-        title="Ugarit | iAligner"
-        scroll="noscroll"
-      ></iframe>
+      <div className="alignmentContainer">
+        <iframe
+          className="alignment"
+          frameBorder="0"
+          seamless="seamless"
+          allowtransparency="true"
+          src={chapter.alignment}
+          title="Ugarit | iAligner"
+          scrolling="no"
+        ></iframe>
+      </div>
     );
   }
 };
