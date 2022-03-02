@@ -1,6 +1,8 @@
-import { useState, useContext } from "react";
+import "../styles/course.css";
+import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ApiContext } from "../Context";
+import Syllabus from "../components/Syllabus";
 import {
   showTitle,
   showTable,
@@ -136,8 +138,11 @@ const Lesson = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="courseContainer">
+      <div className="syllabusContainer">
+        <Syllabus />
+      </div>
+      <div className="chapterContainer">
         {showTitle(thisChapter)}
 
         {/* SHOW TEXT */}
@@ -171,7 +176,7 @@ const Lesson = () => {
         {showAlignment(thisChapter)}
         {showFootnotes(thisChapter)}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,28 @@
+.iFrameContainer {
+  height: 500px;
+  width: 100%;
+}
+
+.alignmentContainer {
+  width: 100%;
+  height: 100%;
+}
+.alignment {
+  overflow: auto;
+  height: 250px;
+  width: 100%;
+}
+
+.courseContainer {
+  margin: 0;
+  display: flex;
+  width: 100%;
+}
+
+.syllabusContainer {
+  width: 25%;
+}
+
+.chapterContainer {
+  width: 75%;
+}
