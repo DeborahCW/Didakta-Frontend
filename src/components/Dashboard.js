@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import Syllabus from "../components/Syllabus";
+import Syllabus from "./Syllabus";
+import Profile from "./Profile";
 
 const Dashboard = () => {
   return (
-    <div class="dashboard">
+    <div className="dashboard">
       <h1>Dashboard</h1>
       <Syllabus />
-      <Link to="/course">Continue learning</Link>
+      <Profile />
     </div>
   );
 };

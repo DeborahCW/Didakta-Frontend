@@ -27,43 +27,20 @@ export default function ButtonAppBar() {
               />
             </Link>
           </Typography>
-          <Link to="/about" style={{ textDecoration: "none"}}>
-            <Button 
-              sx={{ color: "#fffde7" }}>About</Button>
+          <Link to="/about" style={{ textDecoration: "none" }}>
+            <Button sx={{ color: "#fffde7" }}>About</Button>
           </Link>
-          <Link to="/dashboard" style={{ textDecoration: "none"}}>
-            <Button 
-              sx={{ color: "#fffde7"}}>Dashboard</Button>
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+            <Button sx={{ color: "#fffde7" }}>Dashboard</Button>
           </Link>
-          <Link to="/login" style={{ textDecoration: "none"}}>
-            <Button 
-              sx={{ color: "#fffde7"}}>Login</Button>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Button sx={{ color: "#fffde7" }}>Login</Button>
           </Link>
-          <Link to="/register" style={{ textDecoration: "none"}}>
-            <Button 
-              sx={{ color: "#fffde7"}}>Register</Button>
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            <Button sx={{ color: "#fffde7" }}>Register</Button>
           </Link>
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
-
-// import {Route, Routes, Link} from "react-router-dom";
-
-// const Header = () => {
-
-//     return (
-//         <>
-//             <TopHeader>
-//                 <NavBar>
-//                     <Link to="/"><Logo src={logo}/></Link>
-//                     <Link to="Login"><A>Login</A></Link>
-//                     <Link to="Register"><A>Register</A></Link>
-//                 </NavBar>
-//             </TopHeader>
-//         </>
-//     )
-// }
-
-// export default Header
