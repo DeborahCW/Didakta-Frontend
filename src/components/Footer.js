@@ -11,6 +11,8 @@ import logo from "../images/icon-red.png";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import "../styles/footer.css"
+import "../styles/mui_styles.css"
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
@@ -33,14 +35,14 @@ function Copyright(props) {
 
 const Footer = () => {
   return (
-    <footer>
-      <Box
+    <footer >
+      <Box className="box-MuiBox-root-css-cuqtms"
         px={{ xs: 3, sm: 10 }}
         py={{ xs: 5, sm: 10 }}
         sx={{ backgroundColor: "#78909c" }}
         color="#fffde7"
         display="flex"
-        
+        position="static"
       >
         <Link to="/">
           <img
@@ -73,7 +75,7 @@ const Footer = () => {
             sm={4} 
             marginLeft="5em" 
             direction="row">Home</Grid>
-             <Grid item component={Link} to="/"
+             <Grid item component={Link} href="/dashboard"
             color="#fffde7"
             textDecoration="none"
             fontWeight="bold"
@@ -81,42 +83,42 @@ const Footer = () => {
             sm={4} 
             marginLeft="5em" 
             direction="row">Library</Grid>
-             <Grid item component={Link} to="/"
+             <Grid item component={Link} to="/contact"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
             sm={4} 
             marginLeft="5em" 
             direction="column">Contact</Grid>
-             <Grid item component={Link} to="/"
+             <Grid item component={Link} to="/login"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
             sm={4} 
             marginLeft="5em" 
             direction="column">Login</Grid>
- <Grid item component={Link} to="/"
+ <Grid item component={Link} to="/about"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
             sm={4} 
             marginLeft="5em" 
             direction="row">About</Grid>
-           <Grid item component={Link} to="/"
+           <Grid item component={Link} to="/dashboard"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
             sm={4} 
             marginLeft="5em" 
             direction="column">Dashboard</Grid>
-             <Grid item component={Link} to="/"
+             <Grid item component={Link} to="/dashboard"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
             sm={4} 
             marginLeft="5em" 
             direction="column">FAQs</Grid>
-             <Grid item component={Link} to="/"
+             <Grid item component={Link} to="/dashboard"
             color="#fffde7"
             textDecoration="none"
             xs={12} 
@@ -126,37 +128,37 @@ const Footer = () => {
               
               <Grid item 
               component={"a"} 
-              href="www.gmail.com"
+              href="mail to: didakta.project@gmail.com"
               >
-                <img src="{email}" 
+                <EmailIcon />
+                {/* <img src={"EmailIcon"} 
                 height={"4em"}
-                 />
+              
+                 /> */}
               </Grid>
               <Grid item component={"a"} 
-              href="www.github.com"
+              href="https://github.com/mrclcyn/Didakta-Frontend.git"
               >
-                <img  src="{gitHub}"
-               
-                />
+                <GitHubIcon></GitHubIcon>
               </Grid>
               <Grid item component={"a"} 
               href="www.telegram.com"
               >
-                <img  src="{telegram}"/>
+                <TelegramIcon/>
               </Grid>
               <Grid item component={"a"} 
               href="www.twitter.com"
               >
-                <img  src="{twitter}"/>
+                <TwitterIcon/>
               </Grid>
             </Grid>
-            <Box
+            <Box className="MuiBox-root-css-1gjlakx"
               textAlign="center"
               pt={{ xs: 5, sm: 10 }}
               pb={{ xs: 5, sm: 0 }}
             >
               {/* DIDAKTA &reg; {new Date().getFullYear()} */}
-              <Copyright sx={{ mt: 8, mb: 4 }} />
+              <Copyright sx={{ mt: 4, mb: 2 }} />
             </Box>
          
         </Container>
