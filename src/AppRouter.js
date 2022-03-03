@@ -1,21 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import { ApiController } from "./Context";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import App from "./App";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Course from "./pages/Course";
-import Dashboard from "./pages/Dashboard";
 import Home from "./components/Home";
 import About from "./components/About";
+import Course from "./components/Course";
+import Dashboard from "./components/Dashboard";
+import Quiz from "./components/Quiz";
 
 const AppRouter = () => {
   return (
     <div>
       <ApiController>
         <Header />
-       
+
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <Route path="/course/:lessonId/:chapterId" element={<Course />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
+          <Route path="/quiz/:lessonId/:quizId" element={<Quiz />} />
         </Routes>
         <Footer />
       </ApiController>

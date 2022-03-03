@@ -82,7 +82,7 @@ export const showAudio = (chapter) => {
 };
 
 export const showQuestionText = (chapter) => {
-  if (chapter.questionText) {
+  if (chapter.questionText[0]) {
     return chapter.questionText.map((paragraph) => {
       return <p className="chapterText">{paragraph}</p>;
     });
@@ -96,7 +96,7 @@ export const showImg = (chapter) => {
 };
 
 export const showAlignmentText = (chapter) => {
-  if (chapter.alignmentText) {
+  if (chapter.alignmentText[0]) {
     return chapter.alignmentText.map((paragraph) => {
       return <p className="chapterText">{paragraph}</p>;
     });
@@ -122,7 +122,7 @@ export const showAlignment = (chapter) => {
 };
 
 export const showFootnotes = (chapter) => {
-  if (chapter.footnotes) {
+  if (chapter.footnotes[0]) {
     return (
       <div className="footnotes">
         <hr />

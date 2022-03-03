@@ -1,8 +1,8 @@
 import "../styles/course.css";
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ApiContext } from "../Context";
-import Syllabus from "../components/Syllabus";
+import Syllabus from "./Syllabus";
 import {
   showTitle,
   showTable,
@@ -17,12 +17,22 @@ import {
   showFootnotes,
 } from "../functions/lessonFunctions";
 
-const Lesson = () => {
+const Course = () => {
+  const [correction, setCorrection] = useState("");
+  const [goButton, setGoButton] = useState(true);
+  const [hintToggle, setHintToggle] = useState(false);
+  const [showNext, setShowNext] = useState(false);
+  const [showGoQuiz, setShowGoQuiz] = useState(false);
+
   const { lessonId, chapterId } = useParams();
   const [lessons, setLessons] = useContext(ApiContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const thisLesson = lessons.__html.filter((lesson) => lesson._id === lessonId);
-  const thisChapter = thisLesson[0].chapters.filter(
+  const thisLesson = lessons.__html.filter(
+    (lesson) => lesson._id === lessonId
+  )[0];
+  const thisChapter = thisLesson.chapters.filter(
     (chapter) => chapter._id === chapterId
   )[0];
 
@@ -32,13 +42,50 @@ const Lesson = () => {
   const [selectedAnswer_1, setSelectedAnswer_1] = useState(
     thisChapter.questions[0] && thisChapter.questions[0].answers_1[0]
   );
-  console.log(thisChapter);
+
+  useEffect(() => {
+    setCorrection("");
+    setGoButton(true);
+  }, [location]);
+
+  const handlePrev = () => {
+    let prevChapterNumber = thisChapter.number - 1;
+    let prevChapter = thisLesson.chapters.filter(
+      (chapter) => chapter.number == prevChapterNumber
+    );
+    navigate(`/course/${lessonId}/${prevChapter[0]._id}`);
+  };
+  const handleNext = () => {
+    let nextChapterNumber = thisChapter.number + 1;
+    let nextChapter = thisLesson.chapters.filter(
+      (chapter) => chapter.number == nextChapterNumber
+    );
+    navigate(`/course/${lessonId}/${nextChapter[0]._id}`);
+  };
+
+  const handleGoQuiz = () => {
+    navigate(`/`);
+  };
+
+  useEffect(() => {
+    let nextChapterNumber = thisChapter.number + 1;
+    let nextChapter = thisLesson.chapters.filter(
+      (chapter) => chapter.number === nextChapterNumber
+    );
+    if (nextChapter.length === 0) {
+      setShowNext(false);
+      setShowGoQuiz(true);
+    } else {
+      setShowNext(true);
+      setShowGoQuiz(false);
+    }
+  }, [chapterId]);
 
   const showQuestions = (chapter) => {
-    if (chapter.questions) {
+    if (chapter.questions[0]) {
       return chapter.questions.map((question) => {
         if (question.tags == "dropDown") {
-          if (question.answers_1) {
+          if (question.answers_1[0]) {
             return (
               // rendering the text of each question inside chapter + answers (Drop Down)
               <div>
@@ -53,19 +100,11 @@ const Lesson = () => {
                       question.answers_1[question.correctAnswer_1] ==
                         selectedAnswer_1
                     ) {
-                      document.getElementById("submitButton").style.display =
-                        "none";
-                      document.getElementById("correctSubmitted").innerHTML =
-                        "Correct!";
-                      document.getElementById("answerExplanation").innerHTML =
-                        question.explanation ? question.explanation : "";
+                      setCorrection("Correct!");
+                      setGoButton(false);
                     } else {
-                      document.getElementById("submitButton").style.display =
-                        "none";
-                      document.getElementById("incorrectSubmitted").innerHTML =
-                        "Incorrect!";
-                      document.getElementById("answerExplanation").innerHTML =
-                        question.explanation ? question.explanation : "";
+                      setCorrection("Incorrect!");
+                      setGoButton(false);
                     }
                   }}
                 >
@@ -87,22 +126,39 @@ const Lesson = () => {
                       return <option value={answer_1}>{answer_1}</option>;
                     })}
                   </select>
-                  <input id="submitButton" type="submit" value="Go!" />
+                  <input
+                    style={
+                      goButton
+                        ? { display: "inline-block" }
+                        : { display: "none" }
+                    }
+                    id="submitButton"
+                    type="submit"
+                    value="Go!"
+                  />
                 </form>
                 {question.hint && (
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      document.getElementById("hint").innerHTML = question.hint;
+                      setHintToggle(hintToggle ? false : true);
                     }}
                   >
                     Hint
                   </button>
                 )}
-                <div id="hint"></div>
-                <div id="correctSubmitted"></div>
-                <div id="incorrectSubmitted"></div>
-                <div id="answerExplanation"></div>
+                <div id="hint">{hintToggle ? question.hint : ""}</div>
+                <div id="correction">{correction}</div>
+                <div
+                  id="answerExplanation"
+                  style={
+                    correction == "Incorrect!"
+                      ? { display: "block" }
+                      : { display: "none" }
+                  }
+                >
+                  {question.explanation}
+                </div>
               </div>
             );
           } else {
@@ -140,7 +196,7 @@ const Lesson = () => {
   return (
     <div className="courseContainer">
       <div className="syllabusContainer">
-        <Syllabus />
+        <Syllabus lessonId={lessonId} chapterId={chapterId} />
       </div>
       <div className="chapterContainer">
         {showTitle(thisChapter)}
@@ -175,9 +231,24 @@ const Lesson = () => {
         {showAlignmentText(thisChapter)}
         {showAlignment(thisChapter)}
         {showFootnotes(thisChapter)}
+
+        {/* PREV/NEXT BUTTONS   */}
+        <button onClick={handlePrev}>Previous</button>
+        <button
+          style={showNext ? { display: "inline" } : { display: "none" }}
+          onClick={handleNext}
+        >
+          Next
+        </button>
+        <button
+          style={showGoQuiz ? { display: "inline" } : { display: "none" }}
+          onClick={handleGoQuiz}
+        >
+          Check your knowledge with a quiz
+        </button>
       </div>
     </div>
   );
 };
 
-export default Lesson;
+export default Course;
