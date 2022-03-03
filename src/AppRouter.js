@@ -5,7 +5,6 @@ import Register from "./components/Register";
 import App from "./App";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
 import About from "./components/About";
 import Course from "./components/Course";
 import Dashboard from "./components/Dashboard";
@@ -16,7 +15,6 @@ const AppRouter = () => {
     <div>
       <ApiController>
         <Header />
-
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
@@ -24,7 +22,7 @@ const AppRouter = () => {
           <Route path="/course/:lessonId/:chapterId" element={<Course />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
-          <Route path="/quiz/:lessonId/:quizId" element={<Quiz />} />
+          <Route path="/quiz/:lessonId/:questionId" element={<Quiz />} />
         </Routes>
         <Footer />
       </ApiController>
