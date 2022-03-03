@@ -21,6 +21,7 @@ const Course = () => {
   const [correction, setCorrection] = useState("");
   const [goButton, setGoButton] = useState(true);
   const [hintToggle, setHintToggle] = useState(false);
+  const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [showGoQuiz, setShowGoQuiz] = useState(false);
 
@@ -64,14 +65,20 @@ const Course = () => {
   };
 
   const handleGoQuiz = () => {
-    navigate(`/`);
+    navigate(`/quiz/${lessonId}/${thisLesson.quiz.questions[0]._id}`);
   };
 
   useEffect(() => {
+    let prevChapterNumber = thisChapter.number - 1;
     let nextChapterNumber = thisChapter.number + 1;
     let nextChapter = thisLesson.chapters.filter(
       (chapter) => chapter.number === nextChapterNumber
     );
+    if (prevChapterNumber == 0) {
+      setShowPrev(false);
+    } else {
+      setShowPrev(true);
+    }
     if (nextChapter.length === 0) {
       setShowNext(false);
       setShowGoQuiz(true);
@@ -233,7 +240,12 @@ const Course = () => {
         {showFootnotes(thisChapter)}
 
         {/* PREV/NEXT BUTTONS   */}
-        <button onClick={handlePrev}>Previous</button>
+        <button
+          style={showPrev ? { display: "inline" } : { display: "none" }}
+          onClick={handlePrev}
+        >
+          Previous
+        </button>
         <button
           style={showNext ? { display: "inline" } : { display: "none" }}
           onClick={handleNext}

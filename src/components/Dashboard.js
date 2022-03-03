@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Syllabus from "./Syllabus";
 import Profile from "./Profile";
 

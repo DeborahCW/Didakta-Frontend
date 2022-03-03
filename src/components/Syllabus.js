@@ -33,7 +33,9 @@ const Syllabus = ({ lessonId, chapterId }) => {
             {lesson.quiz && (
               <div>
                 {lesson.number}.{" "}
-                <Link to={`/quiz/${lesson._id}/${lesson.quiz._id}`}>
+                <Link
+                  to={`/quiz/${lesson._id}/${lesson.quiz.questions[0]._id}`}
+                >
                   Quiz: {lesson.quiz.title}
                 </Link>
               </div>
