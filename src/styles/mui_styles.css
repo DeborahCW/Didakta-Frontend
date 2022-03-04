@@ -1,11 +1,18 @@
 .MuiContainer-root-MuiContainer-maxWidthSm-css-kae4yu-MuiContainer-root {
   padding-right: 0rem;
   padding-left: 0rem;
+  padding-top: 0rem;
+  position: relative;
+  height: "100%";
 }
 
-.box-MuiBox-root-css-cuqtms {
+.MuiTypography-root-MuiTypography-h2-MuiTypography-gutterBottom-css-490uua-MuiTypography-root {
   padding-bottom: 0rem;
-  padding-right: 0rem;
+}
+
+.box-MuiBox-root-css-cuqtms-MuiBox-root-css-18khgi0 {
+  padding-bottom: 2rem;
+  padding-right: 4rem;
   padding-left: 4rem;
   padding-top: 2rem;
 }
@@ -15,7 +22,7 @@
 }
 
 .MuiTypography-root-MuiTypography-h5-MuiTypography-gutterBottom-css-xwdu4f-MuiTypography-root {
-  padding-bottom: 2rem;
+  padding-bottom: 0rem;
 }
 
 /* .alignmentBlock28937 {

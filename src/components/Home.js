@@ -15,21 +15,22 @@ export default function Home() {
    
     return(
         <Container className="MuiContainer-root-MuiContainer-maxWidthSm-css-kae4yu-MuiContainer-root"
-        component="main" sx={{ mt: 8, mb: 2, pl: 1 }} maxWidth="sm" justifyContent="center" >
+        component="main" sx={{ mt: 3, mb: 2, pl: 1 }} maxWidth="sm" justifyContent="center" >
              {/* <Card sx={{ pl:5, pr: 5, pt:5, pb:-10 }} bgColor="#eceff1" >  */}
             <Link to="/register">
           <img
             id="Logo"
             width="100"
-            padding-top="3"
+            // padding-top="3"
             src={logo}
             alt="Didakta Logo"
-            style={{ pt: "10px", mt: "20px", pl: 8 }}
+            style={{ pt: "5px", mt: "10px", pl: 8 }}
           />
             </Link>
                
             {/* <Typography variant="body1" justifyContent="center" marginTop="50px"></Typography> */}
-        <Typography variant="h2" component="h1" gutterBottom justifyContent="center" sx={{ pl: 1, }}>
+        <Typography className="MuiTypography-root-MuiTypography-h2-MuiTypography-gutterBottom-css-490uua-MuiTypography-root" 
+        variant="h2" component="h1" gutterBottom justifyContent="center" sx={{ pl: 1, }}>
          Learn ancient Greek
         </Typography>
         <Typography className="MuiTypography-root-MuiTypography-h5-MuiTypography-gutterBottom-css-xwdu4f-MuiTypography-root"
@@ -40,16 +41,16 @@ export default function Home() {
         <Typography variant="body1" justifyContent="center" sx={{ pl: 23 }}>Click to register or login.</Typography>
           
             {/* <Box backgroundColor="#eceff1">   */}
-            <div className="alignmentBlock28937">
+            <div >
         <iframe
-          className="alignment"
+          className="alignmentBlock"
           frameBorder="0"
           seamless="seamless"
           allowtransparency="true"
-          src="http://ugarit.ialigner.com/embed.php?id=28937&pb=0&user=0&title=0&pi=0" height="100" width="800"
+          src="http://ugarit.ialigner.com/embed.php?id=28937&pb=0&user=0&title=0&pi=0" 
           title="Ugarit | iAligner"
           scrolling="no"
-          height="200px"
+          height="70%"
         ></iframe>
         {/* <CardActions >
         <Button size="small" >learn more</Button>
@@ -57,7 +58,7 @@ export default function Home() {
       </div>
       {/* </Card> */}
       {/* </Box> */}
-
+     
       </Container>
     )
 }

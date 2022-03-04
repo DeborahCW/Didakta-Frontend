@@ -35,13 +35,15 @@ const Footer = () => {
   return (
     <footer>
       <Box
-        className="box-MuiBox-root-css-cuqtms"
-        px={{ xs: 3, sm: 10 }}
-        py={{ xs: 5, sm: 10 }}
-        sx={{ backgroundColor: "#78909c" }}
+        className="box-MuiBox-root-css-cuqtms-MuiBox-root-css-18khgi0"
+        // paddingBottom="0"
+        // px={{ xs: 3, sm: 10 }}
+        // py={{ xs: 5, sm: 10 }}
+        sx={{ backgroundColor: "#78909c", boxShadow: 3 }}
         color="#fffde7"
         display="flex"
         position="static"
+        
       >
         <Link to="/">
           <img
@@ -53,19 +55,19 @@ const Footer = () => {
             style={{ paddingTop: "10px" }}
           />
         </Link>
-        <Container
+        {/* <Container
           maxWidth="lg"
           direction="row"
           display="flex"
           gridTemplateColumns="repeat(3, 1fr)"
           gridTemplateRows="repeat(4, 1fr)"
           gap={2}
-        >
+        > */}
           <Grid container spacing={2} direction="row" jusitfy="center">
-            <Grid
+          <Grid
               item
               component={Link}
-              to="/"
+              href="/"
               color="#fffde7"
               textDecoration="none"
               fontWeight="bold"
@@ -93,33 +95,33 @@ const Footer = () => {
             <Grid
               item
               component={Link}
-              to="/contact"
+              href="/contact"
               color="#fffde7"
               textDecoration="none"
               xs={12}
               sm={4}
               marginLeft="5em"
-              direction="column"
+              direction="row"
             >
               Contact
             </Grid>
             <Grid
               item
               component={Link}
-              to="/login"
+              href="/login"
               color="#fffde7"
               textDecoration="none"
               xs={12}
               sm={4}
               marginLeft="5em"
-              direction="column"
+              direction="row"
             >
               Login
             </Grid>
             <Grid
               item
               component={Link}
-              to="/about"
+              href="/about"
               color="#fffde7"
               textDecoration="none"
               xs={12}
@@ -132,7 +134,7 @@ const Footer = () => {
             <Grid
               item
               component={Link}
-              to="/dashboard"
+              href="/dashboard"
               color="#fffde7"
               textDecoration="none"
               xs={12}
@@ -145,7 +147,7 @@ const Footer = () => {
             <Grid
               item
               component={Link}
-              to="/dashboard"
+              href="/dashboard"
               color="#fffde7"
               textDecoration="none"
               xs={12}
@@ -158,7 +160,7 @@ const Footer = () => {
             <Grid
               item
               component={Link}
-              to="/dashboard"
+              href="/dashboard"
               color="#fffde7"
               textDecoration="none"
               xs={12}
@@ -193,18 +195,22 @@ const Footer = () => {
             <Grid item component={"a"} href="www.twitter.com">
               <TwitterIcon />
             </Grid>
+            
+           
           </Grid>
           <Box
             className="MuiBox-root-css-1gjlakx"
             textAlign="center"
             pt={{ xs: 5, sm: 10 }}
             pb={{ xs: 5, sm: 0 }}
+            display="flex"
+            direction="column"
           >
             {/* DIDAKTA &reg; {new Date().getFullYear()} */}
             <Copyright sx={{ mt: 4, mb: 2 }} />
           </Box>
-        </Container>
-      </Box>
+        {/* </Container> */}
+     </Box>
     </footer>
   );
 };
