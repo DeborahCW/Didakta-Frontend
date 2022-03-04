@@ -29,31 +29,18 @@ export default function About() {
             </Link>
                
             {/* <Typography variant="body1" justifyContent="center" marginTop="50px"></Typography> */}
-        <Typography variant="h2" component="h1" gutterBottom justifyContent="center" sx={{ pl: 1, }}>
+        <Typography variant="h4" component="h1" gutterBottom justifyContent="center">
          About DIDAKTA
         </Typography>
         <Typography className="MuiTypography-root-MuiTypography-h5-MuiTypography-gutterBottom-css-xwdu4f-MuiTypography-root"
-        variant="h5" component="h2" gutterBottom justifyContent="center" sx={{ pl:5 }}>
-          {'A masterclass provided for you by Didakta.'}
+        variant="h6" component="h2" gutterBottom justifyContent="center" >
+          {'Your learning experience with Didakta was founded by Farnoosh in 2022, in collaboration with the University of Leipzig...'}
           
         </Typography>
         {/* <Typography variant="body1" justifyContent="center" sx={{ pl: 23 }}>Click to register or login.</Typography> */}
           
             {/* <Box backgroundColor="#eceff1">   */}
-            <div className="alignmentBlock28937">
-        <iframe
-          className="alignment"
-          frameBorder="0"
-          seamless="seamless"
-          allowtransparency="true"
-          src="http://ugarit.ialigner.com/embed.php?id=28937&pb=0&user=0&title=0&pi=0" height="400" width="800"
-          title="Ugarit | iAligner"
-          scrolling="no"
-        ></iframe>
-        {/* <CardActions >
-        <Button size="small" >learn more</Button>
-      </CardActions> */}
-      </div>
+       
       {/* </Card> */}
       {/* </Box> */}
 
