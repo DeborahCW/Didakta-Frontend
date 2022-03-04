@@ -28,6 +28,7 @@ const Quiz = () => {
     (question) => question._id == questionId
   )[0];
 
+  // only for when tags == "dropDown"
   const [selectedAnswer, setSelectedAnswer] = useState(
     thisQuiz.questions[0] && thisQuiz.questions[0].answers[0]
   );
@@ -35,11 +36,20 @@ const Quiz = () => {
     thisQuiz.questions[0] && thisQuiz.questions[0].answers_1[0]
   );
 
+  // only for when tags == "multipleChoice"
+  // const [chosen, setChosen] = useState(() => {
+  //   if (thisQuiz.questions[0] && thisQuestion.tags[0] === "multipleChoice") {
+  //     return thisQuestion.answers[0];
+  //   }
+  // });
+
+  // console.log(chosen);
   console.log(thisQuestion);
   console.log(thisQuiz.questions);
   useEffect(() => {
     setCorrection("");
     setGoButton(true);
+    setShowNext(false);
   }, [location]);
 
   const handleNext = () => {
@@ -170,7 +180,7 @@ const Quiz = () => {
             <div
               id="answerExplanation"
               style={
-                correction == "Incorrect!"
+                correction === "Incorrect!"
                   ? { display: "block" }
                   : { display: "none" }
               }
@@ -180,11 +190,22 @@ const Quiz = () => {
           </div>
         );
       }
-    } else if (question.tags == "multipleChoice") {
+    } else if (question.tags === "multipleChoice") {
       // if tags === "multipleChoice"
       return (
         <div>
-          <form>
+          <form
+          // onSubmit={(e) => {
+          //   e.preventDefault();
+          //   if (question.answers[question.correctAnswer] == chosen) {
+          //     setCorrection("Correct!");
+          //     setGoButton(false);
+          //   } else {
+          //     setCorrection("Incorrect!");
+          //     setGoButton(false);
+          //   }
+          // }}
+          >
             {question.answers.map((answer) => {
               return (
                 <label>
@@ -195,7 +216,7 @@ const Quiz = () => {
                     className="multipleChoice"
                     name={question.tags[0]}
                     value={answer}
-                    onChange={(e) => setSelectedAnswer(e.target.value)}
+                    // onChange={(e) => setChosen(e.target.value)}
                   />
                 </label>
               );
