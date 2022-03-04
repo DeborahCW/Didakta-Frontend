@@ -11,26 +11,6 @@ import "../styles/mui_styles.css";
 import "../styles/home.css";
 
 export default function Home() {
-  return (
-    <Container
-      className="MuiContainer-root-MuiContainer-maxWidthSm-css-kae4yu-MuiContainer-root"
-      component="main"
-      sx={{ mt: 8, mb: 2, pl: 1 }}
-      maxWidth="sm"
-      justifyContent="center"
-    >
-      {/* <Card sx={{ pl:5, pr: 5, pt:5, pb:-10 }} bgColor="#eceff1" >  */}
-      <Link to="/register">
-        <img
-          id="Logo"
-          width="100"
-          padding-top="3"
-          src={logo}
-          alt="Didakta Logo"
-          style={{ pt: "10px", mt: "20px", pl: 8 }}
-        />
-      </Link>
-
 
    
     return(
@@ -62,17 +42,15 @@ export default function Home() {
           
             {/* <Box backgroundColor="#eceff1">   */}
             <div >
-
         <iframe
           className="alignmentBlock"
           frameBorder="0"
           seamless="seamless"
           allowtransparency="true"
-          src="http://ugarit.ialigner.com/embed.php?id=28937&pb=0&user=0&title=0&pi=0" 
+          src="http://ugarit.ialigner.com/embed.php?id=28937&pb=0&user=0&title=0&pi=0"
           title="Ugarit | iAligner"
           scrolling="no"
           height="70%"
-
         ></iframe>
         {/* <CardActions >
         <Button size="small" >learn more</Button>
@@ -80,7 +58,6 @@ export default function Home() {
       </div>
       {/* </Card> */}
       {/* </Box> */}
-
      
       </Container>
     )
