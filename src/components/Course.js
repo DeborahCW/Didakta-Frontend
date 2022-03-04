@@ -100,7 +100,6 @@ const Course = () => {
                 <form
                   onSubmit={(event) => {
                     event.preventDefault();
-
                     if (
                       question.answers[question.correctAnswer] ==
                         selectedAnswer &&
