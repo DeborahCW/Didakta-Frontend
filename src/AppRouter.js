@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ApiController } from "./Context";
+import { ApiController } from "./LessonsContext";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import App from "./App";
@@ -9,6 +9,7 @@ import About from "./components/About";
 import Course from "./components/Course";
 import Dashboard from "./components/Dashboard";
 import Quiz from "./components/Quiz";
+import QuizResult from "./components/QuizResult";
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/quiz/:lessonId/:questionId" element={<Quiz />} />
+          <Route path="/quiz/result" element={<QuizResult />} />
         </Routes>
         <Footer />
       </ApiController>

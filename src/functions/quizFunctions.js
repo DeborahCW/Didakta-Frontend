@@ -53,3 +53,119 @@ export const showQuestionAlignment = (question) => {
     );
   }
 };
+
+export const filterThisLesson = (lessons, lessonId) => {
+  const thisLesson = lessons.__html.filter(
+    (lesson) => lesson._id === lessonId
+  )[0];
+  return thisLesson;
+};
+
+export const filterThisQuestion = (thisLesson, questionId) => {
+  const thisQuestion = thisLesson.quiz.questions.filter(
+    (question) => question._id === questionId
+  )[0];
+  return thisQuestion;
+};
+
+export const findNextQuestionIndex = (thisLesson, questionId) => {
+  return (
+    thisLesson.quiz.questions.findIndex(
+      (question) => question._id === questionId
+    ) + 1
+  );
+};
+
+export const handleDualDropdownSubmit = (
+  question,
+  selectedAnswer,
+  selectedAnswer_1,
+  setCorrection,
+  setGoButton,
+  setShowNext,
+  score,
+  userAnswers
+) => {
+  if (
+    question.answers[question.correctAnswer] == selectedAnswer &&
+    question.answers_1[question.correctAnswer_1] == selectedAnswer_1
+  ) {
+    setCorrection("Correct!");
+    setGoButton(false);
+    setShowNext(true);
+    score.current++;
+    userAnswers.current.push({
+      question: question._id,
+      score: 1,
+    });
+  } else {
+    setCorrection("Incorrect!");
+    setGoButton(false);
+    setShowNext(true);
+    userAnswers.current.push({
+      question: question._id,
+      score: 0,
+    });
+  }
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers.current));
+};
+
+export const handleSingleDropdownSubmit = (
+  question,
+  selectedAnswer,
+  setCorrection,
+  setGoButton,
+  setShowNext,
+  score,
+  userAnswers
+) => {
+  if (question.answers[question.correctAnswer] == selectedAnswer) {
+    setCorrection("Correct!");
+    setGoButton(false);
+    setShowNext(true);
+    score.current++;
+    userAnswers.current.push({
+      question: question._id,
+      score: 1,
+    });
+  } else {
+    setCorrection("Incorrect!");
+    setGoButton(false);
+    setShowNext(true);
+    userAnswers.current.push({
+      question: question._id,
+      score: 0,
+    });
+  }
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers.current));
+};
+
+export const handleMultipleChoiceSubmit = (
+  question,
+  chosen,
+  setCorrection,
+  setGoButton,
+  setShowNext,
+  score,
+  userAnswers
+) => {
+  if (question.answers[question.correctAnswer] == chosen) {
+    setCorrection("Correct!");
+    setGoButton(false);
+    setShowNext(true);
+    score.current++;
+    userAnswers.current.push({
+      question: question._id,
+      score: 1,
+    });
+  } else {
+    setCorrection("Incorrect!");
+    setGoButton(false);
+    setShowNext(true);
+    userAnswers.current.push({
+      question: question._id,
+      score: 0,
+    });
+  }
+  localStorage.setItem("userAnswers", JSON.stringify(userAnswers.current));
+};

@@ -1,34 +1,47 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { ApiContext } from "../Context";
+import { ApiContext } from "../LessonsContext";
 
+///////////////// IMPORTING QUIZ FUNCTIONS /////////////////
 import {
   showQuestionTitle,
   showQuestionTable,
   showQuestionAlignment,
+  filterThisLesson,
+  filterThisQuestion,
+  findNextQuestionIndex,
+  handleDualDropdownSubmit,
+  handleSingleDropdownSubmit,
+  handleMultipleChoiceSubmit,
 } from "../functions/quizFunctions";
 
 const Quiz = () => {
+  ///////////////// STATES & REFERENCES /////////////////
   const [correction, setCorrection] = useState("");
   const [goButton, setGoButton] = useState(true);
   const [hintToggle, setHintToggle] = useState(false);
   const [showNext, setShowNext] = useState(false);
-  const [showFinish, setShowFinish] = useState(false);
+  const [showFinishQuiz, setShowFinishQuiz] = useState(false);
+  const score = useRef(0);
+  const averageScore = useRef(0);
+  const userAnswers = useRef([]);
 
+  ///////////////// URL PARAMS & CONTEXT /////////////////
   const { lessonId, questionId } = useParams();
   const [lessons, setLessons] = useContext(ApiContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const thisLesson = lessons.__html.filter(
-    (lesson) => lesson._id === lessonId
-  )[0];
+  ///////////////// FILTERING CONTEXT FOR QUESTION RELATED DATA /////////////////
+  const thisLesson = filterThisLesson(lessons, lessonId);
   const thisQuiz = thisLesson.quiz;
-  const thisQuestion = thisQuiz.questions.filter(
-    (question) => question._id == questionId
-  )[0];
+  const thisQuestion = filterThisQuestion(thisLesson, questionId);
 
-  // only for when tags == "dropDown"
+  // average calculation & storage /////////////////
+  averageScore.current = (score.current / thisQuiz.questions.length) * 100;
+  localStorage.setItem("averageScore", averageScore.current);
+
+  // only for when tags == "dropDown" /////////////////
   const [selectedAnswer, setSelectedAnswer] = useState(
     thisQuiz.questions[0] && thisQuiz.questions[0].answers[0]
   );
@@ -36,52 +49,59 @@ const Quiz = () => {
     thisQuiz.questions[0] && thisQuiz.questions[0].answers_1[0]
   );
 
-  // only for when tags == "multipleChoice"
-  // const [chosen, setChosen] = useState(() => {
-  //   if (thisQuiz.questions[0] && thisQuestion.tags[0] === "multipleChoice") {
-  //     return thisQuestion.answers[0];
-  //   }
-  // });
+  // only for when tags == "multipleChoice" /////////////////
+  const [chosen, setChosen] = useState(() => {
+    if (thisQuiz.questions[0] && thisQuestion.tags[0] === "multipleChoice") {
+      return thisQuestion.answers[0];
+    }
+  });
 
-  // console.log(chosen);
+  ///////////////// USE THE EFFECT FOR HANDLING BUTTONS ETC. /////////////////
   console.log(thisQuestion);
-  console.log(thisQuiz.questions);
   useEffect(() => {
     setCorrection("");
     setGoButton(true);
     setShowNext(false);
+    setShowFinishQuiz(false);
   }, [location]);
+  useEffect(() => {
+    const nextQuestionIndex = findNextQuestionIndex(thisLesson, questionId);
+    if (!thisQuiz.questions[nextQuestionIndex] && goButton === false) {
+      setShowNext(false);
+      setShowFinishQuiz(true);
+    } else {
+      setShowFinishQuiz(false);
+    }
+  }, [goButton]);
 
+  ///////////////// HANDLING NEXT BUTTON /////////////////
   const handleNext = () => {
-    let thisQuestionIndex = thisQuiz.questions.findIndex(
-      (question) => question._id == questionId
-    );
-    let nextQuestionIndex = thisQuestionIndex + 1;
-    console.log(nextQuestionIndex);
+    const nextQuestionIndex = findNextQuestionIndex(thisLesson, questionId);
     navigate(`/quiz/${lessonId}/${thisQuiz.questions[nextQuestionIndex]._id}`);
   };
 
+  console.log(score);
+  console.log(averageScore);
+
+  ///////////////// RENDERING THE QUESTION /////////////////
   const showQuestion = (question) => {
     if (question.tags == "dropDown") {
       if (question.answers_1[0]) {
         return (
           <div>
             <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (
-                  question.answers[question.correctAnswer] == selectedAnswer &&
-                  question.answers_1[question.correctAnswer_1] ==
-                    selectedAnswer_1
-                ) {
-                  setCorrection("Correct!");
-                  setGoButton(false);
-                  setShowNext(true);
-                } else {
-                  setCorrection("Incorrect!");
-                  setGoButton(false);
-                  setShowNext(true);
-                }
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleDualDropdownSubmit(
+                  question,
+                  selectedAnswer,
+                  selectedAnswer_1,
+                  setCorrection,
+                  setGoButton,
+                  setShowNext,
+                  score,
+                  userAnswers
+                );
               }}
             >
               <select
@@ -113,7 +133,7 @@ const Quiz = () => {
             </form>
             {question.hint && (
               <button
-                onClick={(e) => {
+                onClick={() => {
                   setHintToggle(hintToggle ? false : true);
                 }}
               >
@@ -139,17 +159,17 @@ const Quiz = () => {
         return (
           <div>
             <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (
-                  question.answers[question.correctAnswer] == selectedAnswer
-                ) {
-                  setCorrection("Correct!");
-                  setGoButton(false);
-                } else {
-                  setCorrection("Incorrect!");
-                  setGoButton(false);
-                }
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSingleDropdownSubmit(
+                  question,
+                  selectedAnswer,
+                  setCorrection,
+                  setGoButton,
+                  setShowNext,
+                  score,
+                  userAnswers
+                );
               }}
             >
               <select id="questionDropDown" name="questionDropDown">
@@ -190,21 +210,23 @@ const Quiz = () => {
           </div>
         );
       }
-    } else if (question.tags === "multipleChoice") {
+    } else {
       // if tags === "multipleChoice"
       return (
         <div>
           <form
-          // onSubmit={(e) => {
-          //   e.preventDefault();
-          //   if (question.answers[question.correctAnswer] == chosen) {
-          //     setCorrection("Correct!");
-          //     setGoButton(false);
-          //   } else {
-          //     setCorrection("Incorrect!");
-          //     setGoButton(false);
-          //   }
-          // }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleMultipleChoiceSubmit(
+                question,
+                chosen,
+                setCorrection,
+                setGoButton,
+                setShowNext,
+                score,
+                userAnswers
+              );
+            }}
           >
             {question.answers.map((answer) => {
               return (
@@ -216,7 +238,7 @@ const Quiz = () => {
                     className="multipleChoice"
                     name={question.tags[0]}
                     value={answer}
-                    // onChange={(e) => setChosen(e.target.value)}
+                    onChange={(e) => setChosen(e.target.value)}
                   />
                 </label>
               );
@@ -261,7 +283,7 @@ const Quiz = () => {
     <div>
       {showQuestionTitle(thisQuestion)}
 
-      {/* SHOW QUESTION TEXT */}
+      {/************ SHOW QUESTION TEXT ************/}
       {thisQuestion.text[0] &&
         thisQuestion.text.map((paragraph) => {
           return <p className="questionText">{paragraph}</p>;
@@ -276,19 +298,22 @@ const Quiz = () => {
       {showQuestion(thisQuestion)}
       {showQuestionAlignment(thisQuestion)}
 
-      {/* NEXT BUTTON  */}
+      {/************ NEXT BUTTON  ************/}
       <button
         style={showNext ? { display: "inline" } : { display: "none" }}
         onClick={handleNext}
       >
         Next
       </button>
-      {/* <button
-        style={showGoQuiz ? { display: "inline" } : { display: "none" }}
-        onClick={handleGoQuiz}
+
+      <button
+        style={showFinishQuiz ? { display: "inline" } : { display: "none" }}
+        onClick={() => {
+          navigate("/quiz/result");
+        }}
       >
-        Check your knowledge with a quiz
-      </button> */}
+        Submit quiz result!
+      </button>
     </div>
   );
 };
