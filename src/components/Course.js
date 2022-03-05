@@ -1,7 +1,7 @@
 import "../styles/course.css";
 import { useState, useContext, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { ApiContext } from "../Context";
+import { ApiContext } from "../LessonsContext";
 import Syllabus from "./Syllabus";
 import {
   showTitle,

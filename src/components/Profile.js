@@ -6,6 +6,14 @@ const Profile = () => {
     first: "",
     last: "",
     email: "",
+    id: "",
+    regDate: Date().now,
+    quizProgress: {
+      firstTimeScore: 0,
+      quiz: "",
+    },
+    lessonProgress: "",
+    chapterProgress: "",
   });
 
   useEffect(() => {
@@ -15,7 +23,6 @@ const Profile = () => {
   const getProfile = async () => {
     const token = await localStorage.usertoken;
     const decoded = await jwtDecode(token);
-    console.log(token);
     console.log(decoded);
     setUserData({
       first: decoded.user.first,

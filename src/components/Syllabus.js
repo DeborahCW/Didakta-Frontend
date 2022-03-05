@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ApiContext } from "../Context";
+import { ApiContext } from "../LessonsContext";
 
 const Syllabus = ({ lessonId, chapterId }) => {
   const [lessons, setLessons] = useContext(ApiContext);
