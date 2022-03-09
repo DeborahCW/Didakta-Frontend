@@ -23,7 +23,6 @@ const Profile = () => {
   const getProfile = async () => {
     const token = await localStorage.usertoken;
     const decoded = await jwtDecode(token);
-    console.log(decoded);
     setUserData({
       first: decoded.user.first,
       last: decoded.user.last,
@@ -35,10 +34,10 @@ const Profile = () => {
       chapterProgress: decoded.user.chapterProgress,
     });
   };
+  console.log(userData);
 
   return (
     <div>
-      <h1>User Profile</h1>
       <p>Hello {userData.first}</p>
     </div>
   );

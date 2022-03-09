@@ -1,0 +1,82 @@
+.courseContainer {
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+  .listContainer {
+    width: 25%;
+  }
+  .chapterContainer {
+    margin-top: 100px;
+    width: 75%;
+    .chapterText {
+    }
+    .audioText {
+    }
+    .audioPlayer {
+    }
+    .chapterTable {
+      .chapterTableRow {
+        .chapterTableCell {
+        }
+      }
+    }
+    .videoContainer {
+      .videoPlayer {
+      }
+    }
+
+    .ddContainer {
+      .ddText {
+      }
+      .ddForm {
+        .ddSelect {
+          .ddOption {
+          }
+        }
+        .ddBtn {
+        }
+      }
+      #corr {
+      }
+      #incorr {
+      }
+    }
+
+    .mcContainer {
+      .mcText {
+      }
+      .mcForm {
+        .mcLabel {
+          .mcInput {
+          }
+        }
+        .mcBtn {
+        }
+      }
+    }
+
+    .chapterImg {
+    }
+
+    .alignmentContainer {
+      .alignment {
+      }
+    }
+
+    .footnotes {
+      .ruler {
+      }
+      .footnote {
+      }
+    }
+
+    .btnContainer {
+      .ChapPrevBtn {
+      }
+      .chapNextBtn {
+      }
+      .chapQuizBtn {
+      }
+    }
+  }
+}

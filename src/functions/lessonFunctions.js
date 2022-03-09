@@ -10,9 +10,9 @@ export const showTable = (chapter) => {
       <table className="chapterTable">
         {chapter.table.map((row) => {
           return (
-            <tr>
+            <tr className="chapterTableRow">
               {row.map((e) => {
-                return <td>{e}</td>;
+                return <td className="chapterTableCell">{e}</td>;
               })}
             </tr>
           );
@@ -43,7 +43,7 @@ export const showTable_1 = (chapter) => {
 export const showVideo = (chapter) => {
   if (chapter.youtube) {
     return (
-      <div className="iFrameContainer">
+      <div className="videoContainer">
         <iframe
           className="videoPlayer"
           width="100%"
@@ -125,7 +125,7 @@ export const showFootnotes = (chapter) => {
   if (chapter.footnotes[0]) {
     return (
       <div className="footnotes">
-        <hr />
+        <hr className="ruler" />
         {chapter.footnotes.map((footnote) => {
           return <p className="footnote">{footnote}</p>;
         })}

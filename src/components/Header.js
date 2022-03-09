@@ -1,46 +1,76 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar } from "reactstrap";
+import { NavbarBrand } from "reactstrap";
+import { NavbarToggler } from "reactstrap";
+import { Collapse } from "reactstrap";
+import { Nav } from "reactstrap";
+import { NavItem } from "reactstrap";
+import { NavLink } from "reactstrap";
+import { NavbarText } from "reactstrap";
+import "../styles/header.css";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 
-// import MenuIcon from '@mui/icons-material/Menu';
+const Header = () => {
+  const navigate = useNavigate();
 
-export default function ButtonAppBar() {
+  const logOut = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("usertoken");
+    navigate(`/`);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, backgroundColor: "#78909c " }}>
-      <AppBar sx={{ backgroundColor: "#78909c" }} position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/">
-              <img
-                id="Logo"
-                width="100"
-                padding-top="10"
-                src={logo}
-                alt="Didakta Logo"
-                style={{ paddingTop: "10px" }}
-              />
-            </Link>
-          </Typography>
-          <Link to="/about" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "#fffde7" }}>About</Button>
+    <div className="headerContainer">
+      <Navbar expand="md" light>
+        <NavbarBrand>
+          <Link to="/">
+            <img
+              className="headerLogo"
+              src={logo}
+              width="100"
+              alt="Didakta logo"
+            />
           </Link>
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "#fffde7" }}>Dashboard</Button>
-          </Link>
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "#fffde7" }}>Login</Button>
-          </Link>
-          <Link to="/register" style={{ textDecoration: "none" }}>
-            <Button sx={{ color: "#fffde7" }}>Register</Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        </NavbarBrand>
+        <NavbarToggler onClick={function noRefCheck() {}} />
+        <Collapse navbar>
+          <Nav className="me-auto" navbar>
+            {localStorage.usertoken && (
+              <NavItem className="menuItem">
+                <NavLink>
+                  <Link to="/dashboard">DASHBOARD</Link>
+                </NavLink>
+              </NavItem>
+            )}
+            {localStorage.usertoken && (
+              <NavItem>
+                <NavLink>
+                  <a href="#" onClick={logOut}>
+                    LOGOUT
+                  </a>
+                </NavLink>
+              </NavItem>
+            )}
+            {!localStorage.usertoken && (
+              <NavItem className="menuItem">
+                <NavLink>
+                  <Link to="/login">LOGIN</Link>
+                </NavLink>
+              </NavItem>
+            )}
+            {!localStorage.usertoken && (
+              <NavItem>
+                <NavLink>
+                  <Link to="/register">REGISTER</Link>
+                </NavLink>
+              </NavItem>
+            )}
+          </Nav>
+          <NavbarText></NavbarText>
+        </Collapse>
+      </Navbar>
+    </div>
   );
-}
+};
+export default Header;
