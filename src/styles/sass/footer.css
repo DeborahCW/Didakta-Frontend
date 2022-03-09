@@ -1,11 +1,10 @@
 .footerPalette {
-  flex-shrink: 0;
   width: 100%;
-  background-color: #4b4b4b;
-  bottom: 0;
+  background-color: #524029;
+  height: 200px;
 }
 .footerPalette .footerContainer {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
 }
@@ -22,12 +21,11 @@
 }
 .footerPalette .footerContainer .emptyCol {
   display: inline-block;
-  width: 80%;
+  width: 70%;
 }
 .footerPalette .footerContainer .linksCol {
   display: inline-block;
   padding-top: 70px;
-  width: 150px;
 }
 .footerPalette .footerContainer .linksCol .footerMenu {
   list-style-type: none;
@@ -38,9 +36,10 @@
 .footerPalette .footerContainer .linksCol .footerMenu a:hover {
   color: #ca5555;
 }
-.footerPalette .copyright {
+
+.copyright {
   width: 250px;
-  color: #b4b4b4;
+  color: #ca5555;
   margin: 0 auto;
 }
 

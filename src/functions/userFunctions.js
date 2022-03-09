@@ -3,7 +3,7 @@ import axios from "axios";
 export const register = async (userData) => {
   try {
     const { successData } = await axios.post(
-      "http://localhost:4000/user/register",
+      "https://didakta-backend.herokuapp.com/user/register",
       {
         first: userData.first,
         last: userData.last,
@@ -22,7 +22,7 @@ export const register = async (userData) => {
 
 export const login = (user) => {
   return axios
-    .post("http://localhost:4000/user/login", {
+    .post("https://didakta-backend.herokuapp.com/user/login", {
       email: user.email,
       password: user.password,
     })

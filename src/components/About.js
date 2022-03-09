@@ -47,9 +47,24 @@ export default function About() {
         gutterBottom
         justifyContent="center"
       >
-        {
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }
+        <p>
+          Didakta does not use non-authentic texts. Every text and exercise in
+          Didakta is taken from the selected corpus and you will be reading
+          authentic Greek texts from the very first lesson. If your goal is to
+          fluently read an Ancient Greek text, what better way than actually
+          reading Greek to help you reach your goal. Didakta integrates the
+          traditional sources and textbooks into the corpus-based syllabus. It’s
+          free, open-source and only uses open data. More importantly, it is
+          designed to be localizable with minimum effort. A Persian version is
+          almost ready, and we hope to add other languages soon. If you would
+          like to contribute another translation, please contact us!
+        </p>
+        <p>
+          Content by Farnoosh Shamsian
+          <br />
+          Implemented by Arsalan Moharrebi and Deborah Wright
+        </p>
+        <p>We’re thankful for the invaluable contributions of Tariq Yousef</p>
       </Typography>
       {/* <Typography variant="body1" justifyContent="center" sx={{ pl: 23 }}>Click to register or login.</Typography> */}
 

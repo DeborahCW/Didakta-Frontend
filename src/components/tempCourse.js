@@ -1,8 +1,8 @@
 import "../styles/course.css";
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ApiContext } from "../LessonsContext";
-import List from "./List";
+import Syllabus from "./Syllabus";
 import {
   showTitle,
   showTable,
@@ -17,8 +17,6 @@ import {
   showFootnotes,
 } from "../functions/lessonFunctions";
 
-import { handleMultipleChoiceSubmit } from "../functions/quizFunctions";
-
 const Course = () => {
   const [correction, setCorrection] = useState("");
   const [goButton, setGoButton] = useState(true);
@@ -26,9 +24,6 @@ const Course = () => {
   const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(false);
   const [showGoQuiz, setShowGoQuiz] = useState(false);
-  const [chosen, setChosen] = useState();
-  const score = useRef(0);
-  const userAnswers = useRef([]);
 
   const { lessonId, chapterId } = useParams();
   const [lessons, setLessons] = useContext(ApiContext);
@@ -93,6 +88,7 @@ const Course = () => {
     }
   }, [chapterId]);
 
+  console.log(thisChapter);
   const showQuestions = (chapter) => {
     if (chapter.questions[0]) {
       return chapter.questions.map((question) => {
@@ -100,10 +96,9 @@ const Course = () => {
           if (question.answers_1[0]) {
             return (
               // rendering the text of each question inside chapter + answers (Drop Down)
-              <div className="ddContainer">
-                <p className="ddText">{question.text[0]}</p>
+              <div>
+                <p className="chapterText">{question.text[0]}</p>
                 <form
-                  className="ddForm"
                   onSubmit={(event) => {
                     event.preventDefault();
                     if (
@@ -121,35 +116,24 @@ const Course = () => {
                   }}
                 >
                   <select
-                    className="ddSelect"
                     id="questionDropDown"
                     name="questionDropDown"
                     onChange={(e) => setSelectedAnswer(e.target.value)}
                   >
                     {question.answers.map((answer) => {
-                      return (
-                        <option className="ddOption" value={answer}>
-                          {answer}
-                        </option>
-                      );
+                      return <option value={answer}>{answer}</option>;
                     })}
                   </select>
                   <select
-                    className="ddSelect"
                     id="questionDropDown_1"
                     name="questionDropDown_1"
                     onChange={(e) => setSelectedAnswer_1(e.target.value)}
                   >
                     {question.answers_1.map((answer_1) => {
-                      return (
-                        <option className="ddOption" value={answer_1}>
-                          {answer_1}
-                        </option>
-                      );
+                      return <option value={answer_1}>{answer_1}</option>;
                     })}
                   </select>
                   <input
-                    className="ddBtn"
                     style={
                       goButton
                         ? { display: "inline-block" }
@@ -171,9 +155,7 @@ const Course = () => {
                   </button>
                 )}
                 <div id="hint">{hintToggle ? question.hint : ""}</div>
-                <div id={correction == "Correct!" ? "corr" : "incorr"}>
-                  {correction}
-                </div>
+                <div id="correction">{correction}</div>
                 <div
                   id="answerExplanation"
                   style={
@@ -188,18 +170,10 @@ const Course = () => {
             );
           } else {
             return (
-              <form className="ddForm">
-                <select
-                  className="ddSelect"
-                  id="questionDropDown"
-                  name="questionDropDown"
-                >
+              <form>
+                <select id="questionDropDown" name="questionDropDown">
                   {question.answers.map((answer) => {
-                    return (
-                      <option className="ddOption" value={answer}>
-                        {answer}
-                      </option>
-                    );
+                    return <option value={answer}>{answer}</option>;
                   })}
                 </select>
               </form>
@@ -207,75 +181,21 @@ const Course = () => {
           }
         } else {
           // if tags === "MultipleChoice"
-          return (
-            <div className="mcContainer">
-              <p className="mcText">{question.text[0]}</p>
-              <form
-                className="mcForm"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleMultipleChoiceSubmit(
-                    question,
-                    chosen,
-                    setCorrection,
-                    setGoButton,
-                    setShowNext,
-                    score,
-                    userAnswers
-                  );
-                }}
-              >
-                {question.answers.map((answer) => {
-                  return (
-                    <label className="mcLabel">
-                      {answer}
-                      <input
-                        className="mcInput"
-                        type="radio"
-                        id={answer}
-                        name={question.tags[0]}
-                        value={answer}
-                        onChange={(e) => setChosen(e.target.value)}
-                      />
-                    </label>
-                  );
-                })}
-                <input
-                  className="mcBtn"
-                  style={
-                    goButton ? { display: "inline-block" } : { display: "none" }
-                  }
-                  id="submitButton"
-                  type="submit"
-                  value="Go!"
-                />
-              </form>
-              {question.hint && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setHintToggle(hintToggle ? false : true);
-                  }}
-                >
-                  Hint
-                </button>
-              )}
-              <div id="hint">{hintToggle ? question.hint : ""}</div>
-              <div id={correction == "Correct!" ? "corr" : "incorr"}>
-                {correction}
-              </div>
-              <div
-                id="answerExplanation"
-                style={
-                  correction == "Incorrect!"
-                    ? { display: "block" }
-                    : { display: "none" }
-                }
-              >
-                {question.explanation}
-              </div>
-            </div>
-          );
+          <form>
+            {question.answers.map((answer) => {
+              return (
+                <label>
+                  {answer}
+                  <input
+                    type="radio"
+                    className="multipleChoices"
+                    name={question.tags}
+                    value={answer}
+                  />
+                </label>
+              );
+            })}
+          </form>;
         }
       });
     }
@@ -283,8 +203,8 @@ const Course = () => {
 
   return (
     <div className="courseContainer">
-      <div className="listContainer">
-        <List lessonId={lessonId} chapterId={chapterId} />
+      <div className="syllabusContainer">
+        <Syllabus lessonId={lessonId} chapterId={chapterId} />
       </div>
       <div className="chapterContainer">
         {showTitle(thisChapter)}
@@ -319,30 +239,26 @@ const Course = () => {
         {showAlignmentText(thisChapter)}
         {showAlignment(thisChapter)}
         {showFootnotes(thisChapter)}
-        <div className="btnContainer">
-          {/* PREV/NEXT BUTTONS   */}
-          <button
-            className="ChapPrevBtn"
-            style={showPrev ? { display: "inline" } : { display: "none" }}
-            onClick={handlePrev}
-          >
-            Previous
-          </button>
-          <button
-            className="chapNextBtn"
-            style={showNext ? { display: "inline" } : { display: "none" }}
-            onClick={handleNext}
-          >
-            Next
-          </button>
-          <button
-            className="chapQuizBtn"
-            style={showGoQuiz ? { display: "inline" } : { display: "none" }}
-            onClick={handleGoQuiz}
-          >
-            Check your knowledge with a quiz
-          </button>
-        </div>
+
+        {/* PREV/NEXT BUTTONS   */}
+        <button
+          style={showPrev ? { display: "inline" } : { display: "none" }}
+          onClick={handlePrev}
+        >
+          Previous
+        </button>
+        <button
+          style={showNext ? { display: "inline" } : { display: "none" }}
+          onClick={handleNext}
+        >
+          Next
+        </button>
+        <button
+          style={showGoQuiz ? { display: "inline" } : { display: "none" }}
+          onClick={handleGoQuiz}
+        >
+          Check your knowledge with a quiz
+        </button>
       </div>
     </div>
   );

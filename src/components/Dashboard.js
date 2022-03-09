@@ -1,12 +1,13 @@
+import "../styles/dashboard.css";
+
 import Syllabus from "./Syllabus";
-import Profile from "./Profile";
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <h1>Dashboard</h1>
-      <Syllabus />
-      <Profile />
+      <div className="dashboardContainer">
+        <Syllabus className="syllabus" />
+      </div>
     </div>
   );
 };
