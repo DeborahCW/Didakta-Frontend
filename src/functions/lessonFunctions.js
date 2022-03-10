@@ -7,17 +7,19 @@ export const showTitle = (chapter) => {
 export const showTable = (chapter) => {
   if (chapter.table) {
     return (
-      <table className="chapterTable">
-        {chapter.table.map((row) => {
-          return (
-            <tr className="chapterTableRow">
-              {row.map((e) => {
-                return <td className="chapterTableCell">{e}</td>;
-              })}
-            </tr>
-          );
-        })}
-      </table>
+      <div className="tableContainer">
+        <table className="chapterTable">
+          {chapter.table.map((row) => {
+            return (
+              <tr className="chapterTableRow">
+                {row.map((e) => {
+                  return <td className="chapterTableCell">{e}</td>;
+                })}
+              </tr>
+            );
+          })}
+        </table>
+      </div>
     );
   }
 };
@@ -46,8 +48,8 @@ export const showVideo = (chapter) => {
       <div className="videoContainer">
         <iframe
           className="videoPlayer"
-          width="100%"
-          height="100%"
+          width="560"
+          height="315"
           src={chapter.youtube}
           title="YouTube video player"
           frameBorder="0"
@@ -61,7 +63,9 @@ export const showVideo = (chapter) => {
 
 export const showAudioText = (chapter) => {
   if (chapter.audioText) {
-    return <span className="audioText">{chapter.audioText}</span>;
+    chapter.audioText.map((paragraph) => {
+      return <p className="audioText">{paragraph}</p>;
+    });
   }
 };
 
@@ -70,7 +74,7 @@ export const showAudio = (chapter) => {
     return (
       <iframe
         className="audioPlayer"
-        width="200"
+        width="500"
         height="50"
         src={chapter.audio}
         frameborder="0"
@@ -98,7 +102,7 @@ export const showImg = (chapter) => {
 export const showAlignmentText = (chapter) => {
   if (chapter.alignmentText[0]) {
     return chapter.alignmentText.map((paragraph) => {
-      return <p className="chapterText">{paragraph}</p>;
+      return <p className="alignmentText">{paragraph}</p>;
     });
   }
 };

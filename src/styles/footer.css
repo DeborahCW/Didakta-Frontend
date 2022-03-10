@@ -1,5 +1,5 @@
 .footerPalette {
-  flex-shrink: 0;
+  position: relative;
   width: 100%;
   background-color: #4b4b4b;
   bottom: 0;
@@ -14,10 +14,13 @@
   padding-top: 20px;
 }
 .footerPalette .footerContainer .logoCol .footerLogo {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+.footerPalette .footerContainer .logoCol .footerLogo .logoImg {
+  width: 150px;
 }
 .footerPalette .footerContainer .logoCol .social .socialIcon {
-  padding: 0 2px;
+  padding-right: 7px;
   display: inline-block;
 }
 .footerPalette .footerContainer .emptyCol {
@@ -26,7 +29,7 @@
 }
 .footerPalette .footerContainer .linksCol {
   display: inline-block;
-  padding-top: 70px;
+  padding-top: 40px;
   width: 150px;
 }
 .footerPalette .footerContainer .linksCol .footerMenu {

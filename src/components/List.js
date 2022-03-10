@@ -24,8 +24,8 @@ const Syllabus = ({ lessonId, chapterId }) => {
                         <Link
                           style={
                             chapterId === chapter._id
-                              ? { color: "gray" }
-                              : { color: "green" }
+                              ? { color: "green" }
+                              : { color: "gray" }
                           }
                           to={`/course/${lesson._id}/${chapter._id}`}
                         >

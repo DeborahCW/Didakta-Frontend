@@ -10,7 +10,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const startLearning = () => {
-    navigate("/register");
+    if (localStorage.usertoken) {
+      navigate("/dashboard");
+    } else {
+      navigate("/register");
+    }
   };
 
   return (
