@@ -11,6 +11,7 @@
   width: 100%;
 }
 .syllabusContainer .listAndHeaderContainer .listContainer .oneLessonList {
+  font-size: 17px;
   margin: 100px 30px;
 }
 .syllabusContainer .syllabusImageContainer {

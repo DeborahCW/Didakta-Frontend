@@ -1,3 +1,4 @@
+import "../styles/quiz.css";
 import { useState, useContext, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ApiContext } from "../LessonsContext";
@@ -88,8 +89,9 @@ const Quiz = () => {
     if (question.tags == "dropDown") {
       if (question.answers_1[0]) {
         return (
-          <div>
+          <div className="ddQContainer">
             <form
+              className="ddQForm"
               onSubmit={(e) => {
                 e.preventDefault();
                 handleDualDropdownSubmit(
@@ -105,24 +107,35 @@ const Quiz = () => {
               }}
             >
               <select
+                className="ddQSelect"
                 id="questionDropDown"
                 name="questionDropDown"
                 onChange={(e) => setSelectedAnswer(e.target.value)}
               >
                 {question.answers.map((answer) => {
-                  return <option value={answer}>{answer}</option>;
+                  return (
+                    <option className="ddQOption" value={answer}>
+                      {answer}
+                    </option>
+                  );
                 })}
               </select>
               <select
+                className="ddQSelect"
                 id="questionDropDown_1"
                 name="questionDropDown_1"
                 onChange={(e) => setSelectedAnswer_1(e.target.value)}
               >
                 {question.answers_1.map((answer_1) => {
-                  return <option value={answer_1}>{answer_1}</option>;
+                  return (
+                    <option className="ddQOption" value={answer_1}>
+                      {answer_1}
+                    </option>
+                  );
                 })}
               </select>
               <input
+                className="ddQGoBtn"
                 style={
                   goButton ? { display: "inline-block" } : { display: "none" }
                 }
@@ -141,7 +154,9 @@ const Quiz = () => {
               </button>
             )}
             <div id="hint">{hintToggle ? question.hint : ""}</div>
-            <div id="correction">{correction}</div>
+            <div id={correction == "Correct!" ? "corr" : "incorr"}>
+              {correction}
+            </div>
             <div
               id="answerExplanation"
               style={
@@ -157,8 +172,9 @@ const Quiz = () => {
       } else {
         // if tags === "dropDown" && !answers_1
         return (
-          <div>
+          <div className="ddQContainer">
             <form
+              className="ddQForm"
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSingleDropdownSubmit(
@@ -172,12 +188,21 @@ const Quiz = () => {
                 );
               }}
             >
-              <select id="questionDropDown" name="questionDropDown">
+              <select
+                className="ddQSelect"
+                id="questionDropDown"
+                name="questionDropDown"
+              >
                 {question.answers.map((answer) => {
-                  return <option value={answer}>{answer}</option>;
+                  return (
+                    <option className="ddQOption" value={answer}>
+                      {answer}
+                    </option>
+                  );
                 })}
               </select>
               <input
+                className="ddQGoBtn"
                 style={
                   goButton ? { display: "inline-block" } : { display: "none" }
                 }
@@ -196,7 +221,9 @@ const Quiz = () => {
               </button>
             )}
             <div id="hint">{hintToggle ? question.hint : ""}</div>
-            <div id="correction">{correction}</div>
+            <div id={correction == "Correct!" ? "corr" : "incorr"}>
+              {correction}
+            </div>
             <div
               id="answerExplanation"
               style={
@@ -213,8 +240,9 @@ const Quiz = () => {
     } else {
       // if tags === "multipleChoice"
       return (
-        <div>
+        <div className="mcQContainer">
           <form
+            className="mcQForm"
             onSubmit={(e) => {
               e.preventDefault();
               handleMultipleChoiceSubmit(
@@ -230,12 +258,12 @@ const Quiz = () => {
           >
             {question.answers.map((answer) => {
               return (
-                <label>
+                <label className="mcQLabel">
                   {answer}
                   <input
+                    className="mcQRadio"
                     type="radio"
                     id={answer}
-                    className="multipleChoice"
                     name={question.tags[0]}
                     value={answer}
                     onChange={(e) => setChosen(e.target.value)}
@@ -244,12 +272,13 @@ const Quiz = () => {
               );
             })}
             <input
+              className="mcQGoBtn"
               style={
                 goButton ? { display: "inline-block" } : { display: "none" }
               }
               id="submitButton"
               type="submit"
-              value="Go!"
+              value="GO!"
             />
           </form>
           {question.hint && (
@@ -263,7 +292,9 @@ const Quiz = () => {
             </button>
           )}
           <div id="hint">{hintToggle ? question.hint : ""}</div>
-          <div id="correction">{correction}</div>
+          <div id={correction == "Correct!" ? "corr" : "incorr"}>
+            {correction}
+          </div>
           <div
             id="answerExplanation"
             style={
@@ -280,40 +311,52 @@ const Quiz = () => {
   };
 
   return (
-    <div>
+    <div className="quizContainer">
       {showQuestionTitle(thisQuestion)}
 
       {/************ SHOW QUESTION TEXT ************/}
       {thisQuestion.text[0] &&
         thisQuestion.text.map((paragraph) => {
-          return <p className="questionText">{paragraph}</p>;
+          return (
+            <div className="questionTextContainer">
+              <p className="questionText">{paragraph}</p>
+            </div>
+          );
         })}
       {showQuestionTable(thisQuestion)}
 
       {thisQuestion.text_1[0] &&
         thisQuestion.text_1.map((paragraph) => {
-          return <p className="questionText">{paragraph}</p>;
+          return (
+            <div className="questionTextContainer">
+              <p className="questionText">{paragraph}</p>
+            </div>
+          );
         })}
 
       {showQuestion(thisQuestion)}
       {showQuestionAlignment(thisQuestion)}
 
       {/************ NEXT BUTTON  ************/}
-      <button
-        style={showNext ? { display: "inline" } : { display: "none" }}
-        onClick={handleNext}
-      >
-        Next
-      </button>
+      <div className="quizButtonContainer">
+        <button
+          className="quizNextBtn"
+          style={showNext ? { display: "inline" } : { display: "none" }}
+          onClick={handleNext}
+        >
+          Next
+        </button>
 
-      <button
-        style={showFinishQuiz ? { display: "inline" } : { display: "none" }}
-        onClick={() => {
-          navigate("/quiz/result");
-        }}
-      >
-        Submit quiz result!
-      </button>
+        <button
+          className="finishQuizBtn"
+          style={showFinishQuiz ? { display: "inline" } : { display: "none" }}
+          onClick={() => {
+            navigate(`/quiz/result/${lessonId}`);
+          }}
+        >
+          Submit quiz result
+        </button>
+      </div>
     </div>
   );
 };

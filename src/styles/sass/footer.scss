@@ -1,5 +1,5 @@
 .footerPalette {
-  flex-shrink: 0;
+  position: relative;
   width: 100%;
   background-color: #4b4b4b;
   bottom: 0;
@@ -12,14 +12,14 @@
       padding-top: 20px;
       // width: 300px;
       .footerLogo {
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         .logoImg {
-          // width: 200px;
+          width: 150px;
         }
       }
       .social {
         .socialIcon {
-          padding: 0 2px;
+          padding-right: 7px;
           display: inline-block;
         }
       }
@@ -30,7 +30,7 @@
     }
     .linksCol {
       display: inline-block;
-      padding-top: 70px;
+      padding-top: 40px;
       width: 150px;
       .footerMenu {
         list-style-type: none;

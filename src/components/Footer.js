@@ -1,4 +1,4 @@
-import logo from "../images/icon-red.png";
+import logo from "../images/logo-black.png";
 import github from "../images/github.svg";
 import telegram from "../images/telegram.svg";
 import twitter from "../images/twitter.svg";
@@ -27,23 +27,23 @@ const Footer = () => {
           <div className="social">
             <div className="socialIcon">
               <a href="https://github.com/mrclcyn/Didakta-Frontend.git">
-                <img src={github} width="20" alt="GitHub Link" />
+                <img src={github} width="30" alt="GitHub Link" />
               </a>
             </div>
 
             <div className="socialIcon">
               <a href="">
-                <img src={twitter} width="20" alt="Twitter Link" />
+                <img src={twitter} width="30" alt="Twitter Link" />
               </a>
             </div>
             <div className="socialIcon">
               <a href="">
-                <img src={telegram} width="20" alt="Telegram Link" />
+                <img src={telegram} width="30" alt="Telegram Link" />
               </a>
             </div>
             <div className="socialIcon">
               <a href="mailto:didakta.project@gmail.com">
-                <img src={envelope} width="20" alt="Email Link" />
+                <img src={envelope} width="30" alt="Email Link" />
               </a>
             </div>
           </div>
@@ -51,9 +51,6 @@ const Footer = () => {
         <div className="emptyCol"></div>
         <div className="linksCol">
           <ul className="footerMenu">
-            <li>
-              <Link to="/about">About Didakta</Link>
-            </li>
             <li>
               <a href="http://ugarit.ialigner.com/" target="_blank">
                 Ugarit Project

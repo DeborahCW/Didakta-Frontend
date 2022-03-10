@@ -70,7 +70,11 @@ const Course = () => {
   };
 
   const handleGoQuiz = () => {
-    navigate(`/quiz/${lessonId}/${thisLesson.quiz.questions[0]._id}`);
+    if (thisLesson.quiz) {
+      navigate(`/quiz/${lessonId}/${thisLesson.quiz.questions[0]._id}`);
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   useEffect(() => {
@@ -290,15 +294,16 @@ const Course = () => {
         {showTitle(thisChapter)}
 
         {/* SHOW TEXT */}
-        {thisChapter.text[0] &&
-          thisChapter.text.map((paragraph) => (
-            <p
-              className="chapterText"
-              dangerouslySetInnerHTML={{ __html: paragraph }}
-            />
-          ))}
-
-        {showAudioText(thisChapter)}
+        <div className="chapterText">
+          {thisChapter.text[0] &&
+            thisChapter.text.map((paragraph) => (
+              <p dangerouslySetInnerHTML={{ __html: paragraph }} />
+            ))}
+        </div>
+        {thisChapter.audioText &&
+          thisChapter.audioText.map((paragraph) => {
+            return <p className="audioText">{paragraph}</p>;
+          })}
         {showAudio(thisChapter)}
         {showTable(thisChapter)}
 
@@ -326,21 +331,23 @@ const Course = () => {
             style={showPrev ? { display: "inline" } : { display: "none" }}
             onClick={handlePrev}
           >
-            Previous
+            PREVIOUS
           </button>
           <button
             className="chapNextBtn"
             style={showNext ? { display: "inline" } : { display: "none" }}
             onClick={handleNext}
           >
-            Next
+            NEXT
           </button>
           <button
             className="chapQuizBtn"
             style={showGoQuiz ? { display: "inline" } : { display: "none" }}
             onClick={handleGoQuiz}
           >
-            Check your knowledge with a quiz
+            {thisLesson.quiz
+              ? "Check your knowledge with a quiz"
+              : "Back to dashboard"}
           </button>
         </div>
       </div>

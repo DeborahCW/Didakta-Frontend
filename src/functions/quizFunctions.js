@@ -19,19 +19,21 @@ export const showQuestionTitle = (question) => {
 };
 
 export const showQuestionTable = (question) => {
-  if (question.table) {
+  if (question.table != []) {
     return (
-      <table className="questionTable">
-        {question.table.map((row) => {
-          return (
-            <tr>
-              {row.map((e) => {
-                return <td>{e}</td>;
-              })}
-            </tr>
-          );
-        })}
-      </table>
+      <div className="questionTableContainer">
+        <table className="questionTable">
+          {question.table.map((row) => {
+            return (
+              <tr className="questionTableRow">
+                {row.map((e) => {
+                  return <td className="questionTableCell">{e}</td>;
+                })}
+              </tr>
+            );
+          })}
+        </table>
+      </div>
     );
   }
 };

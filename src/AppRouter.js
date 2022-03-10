@@ -26,7 +26,7 @@ const AppRouter = () => {
           <Route path="/dashboard" element={<Syllabus />} />
           <Route path="/about" element={<About />} />
           <Route path="/quiz/:lessonId/:questionId" element={<Quiz />} />
-          <Route path="/quiz/result" element={<QuizResult />} />
+          <Route path="/quiz/result/:lessonId" element={<QuizResult />} />
         </Routes>
         <Footer className="footer" />
       </div>
